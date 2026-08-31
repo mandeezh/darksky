@@ -31,7 +31,7 @@ conda env create -f environment.yml
 conda activate darksky
 ```
 
-## Check serial port 
+## Check serial port - with USB-2-TTL
 
 Connect USB-2-TTL cable. It will show up as a ttyUSB* in device. Check it by:
 ```
@@ -64,7 +64,26 @@ add user to group
 ```
 sudo usermod -aG dialout $USER
 ```
+## Check serial port - GPIO pins on Jetson
+Make sure
+```
+T7 COM2 RX2 -- GPIO Pin 8
+T7 COM2 TX2 -- GPIO Pin 10
+T7 GND      -- GPIO Pin 6
+```
+in libs/config.py, find:
+```
+# UART Configuration
+    UART_PORT = "/dev/ttyUSB0"  
+    UART_BAUDRATE = 115200
+```
+change it to :
 
+```
+# UART Configuration
+    UART_PORT = "/dev/ttyTHS0"  
+    UART_BAUDRATE = 115200
+```
 
 ## test gimbal connection 
 
